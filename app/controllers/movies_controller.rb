@@ -15,7 +15,24 @@ class MoviesController < ApplicationController
     if params[:order]=='release_date' then
       @datehilite='hilite'
     end
-    @movies = Movie.order(params[:order])
+    @all_ratings=Movie.all_ratings
+#    myhash = Hash.new
+#    myhash.add(params[:ratings])
+     if params[:ratings].nil?
+       mykeys=[]
+     else
+       if params[:ratings].class!=Array
+         mykeys=params[:ratings].keys
+       else
+         mykeys=params[:ratings]
+       end
+     end
+     @selected_ratings=mykeys
+     @movies = Movie.where({:rating => mykeys}).all(:order=>params[:order])
+#    @movies = Movie.where({:rating => ['G','PG']}).all(:order => 'title')
+#    @movies = Movie.order(params[:order])
+     @lastorder=params[:order]
+#    flash[:notice]=params
   end
 
   def new
