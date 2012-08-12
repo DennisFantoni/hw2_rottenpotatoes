@@ -9,7 +9,7 @@
     - thisonechecked=@selected_ratings.include?(rating)
     = check_box_tag "ratings[#{rating}]",'',thisonechecked
   = hidden_field_tag('order',@lastorder)
-  = submit_tag 'Refresh'
+  = submit_tag 'Refresh', :id => "ratings_submit"
 
 
 %table#movies
