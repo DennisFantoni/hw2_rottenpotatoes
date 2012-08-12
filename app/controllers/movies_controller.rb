@@ -19,6 +19,13 @@ class MoviesController < ApplicationController
       doredirect=true
     end
 
+    if params[:order].nil?
+      doredirect=false
+    end
+    if params[:ratings].nil?
+        doredirect=false
+    end
+
     if doredirect 
       flash.keep
       redirect_to movies_path (params)
